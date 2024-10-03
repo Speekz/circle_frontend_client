@@ -15,8 +15,9 @@ export default function Home() {
     (state) => state
   );
 
-  const handleSubmit = () => {
-    setOpenNewPaymentModal(!openNewPaymentModal);
+  const handleSubmit = (data: any) => {
+    console.log(data);
+    setOpenNewPaymentModal(false);
   };
 
   return (
