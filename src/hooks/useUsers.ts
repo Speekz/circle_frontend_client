@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API_ENDPOINT = `${NEXT_PUBLIC_CIRCLE_API}/users`;
 
-export const getUsers = () => {
+export const useGetUsers = () => {
   return useQuery({
     queryKey: ["getUsers"],
     queryFn: async () => {

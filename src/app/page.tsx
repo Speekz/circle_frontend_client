@@ -1,9 +1,9 @@
 "use client";
-import { getPayments } from "@/hooks/usePayments";
+import { useGetPayments } from "@/hooks/usePayments";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 
 export default function Home() {
-  getPayments();
+  useGetPayments();
   const { payments } = usePaymentsStore((state) => state);
 
   return (

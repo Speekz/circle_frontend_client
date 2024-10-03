@@ -3,7 +3,7 @@ interface IUser {
   name: string;
 }
 
-export interface IPayments {
+export interface IPayment {
   id: number;
   date: string;
   sender: IUser;

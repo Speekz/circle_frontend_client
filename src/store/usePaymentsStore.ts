@@ -1,14 +1,14 @@
-import { IPayments } from "@/lib/types";
+import { IPayment } from "@/lib/types";
 import { create } from "zustand";
 
 interface IUsePaymentsStore {
-  payments: IPayments[];
-  addPayment: (newPayment: IPayments) => void;
+  payments: IPayment[];
+  addPayment: (newPayment: IPayment) => void;
 }
 
 export const usePaymentsStore = create<IUsePaymentsStore>()((set) => ({
   payments: [],
-  addPayment: (newPayment: IPayments) =>
+  addPayment: (newPayment: IPayment) =>
     set(({ payments }) => ({
       payments: [...payments, newPayment],
     })),
