@@ -40,7 +40,7 @@ export default function Home() {
               ) : (
                 <span>
                   Data fetching is on{" "}
-                  <span className="text-blue-500 font-bold">PAUSE</span>
+                  <span className="text-indigo-500 font-bold">PAUSE</span>
                 </span>
               )}
             </div>
@@ -49,7 +49,7 @@ export default function Home() {
                 "rounded py-2 px-4 text-sm text-white w-24 font-bold",
                 livePayments
                   ? "bg-red-600 data-[hover]:bg-red-500 data-[active]:bg-red-700"
-                  : "bg-sky-600 data-[hover]:bg-sky-500 data-[active]:bg-sky-700"
+                  : "bg-indigo-600 data-[hover]:bg-indigo-500 data-[active]:bg-indigo-700"
               )}
               onClick={toggleLivePayments}
             >
