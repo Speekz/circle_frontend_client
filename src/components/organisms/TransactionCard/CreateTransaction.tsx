@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Card } from "@/components/molecules/Card";
 import { Button, Input, Textarea } from "@headlessui/react";
 import { customAlphabet } from "nanoid";
@@ -14,6 +14,7 @@ import {
   createPaymentSchema,
   TPaymentSchema,
 } from "@/lib/validators/createPaymentSchema";
+import { toast } from "react-toastify";
 
 interface ICreateTransaction {
   onSubmit: (data: TPaymentSchema) => void;
@@ -50,6 +51,13 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
   } = useForm({
     resolver: zodResolver(createPaymentSchema),
   });
+
+  useEffect(() => {
+    // custom error for when sender and receiver are the same
+    if (!!errors[""]) {
+      toast.error(errors[""]?.message?.toString());
+    }
+  }, [errors]);
 
   return (
     <Card>

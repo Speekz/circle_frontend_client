@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactQueryClientProvider } from "@/components/providers/ReactQueryClientProvider";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Circle Dashboard - Payments",
@@ -15,7 +18,10 @@ export default function RootLayout({
   return (
     <ReactQueryClientProvider>
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          {children}
+          <ToastContainer />
+        </body>
       </html>
     </ReactQueryClientProvider>
   );
