@@ -17,7 +17,7 @@ export const useGetPayments = () => {
       addPayment(data.data);
       return data;
     },
-    refetchInterval: isWindowOnFocus() ? 1000 : 500, // This helps fix in some way the browser throttling when not on focus
+    refetchInterval: 1000,
     refetchOnWindowFocus: false,
     refetchIntervalInBackground: true,
   });
