@@ -1,5 +1,4 @@
 import { NEXT_PUBLIC_CIRCLE_API } from "@/lib/environment";
-import { isWindowOnFocus } from "@/lib/pageVisibility";
 import { IPayment } from "@/lib/types";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { useQuery } from "@tanstack/react-query";

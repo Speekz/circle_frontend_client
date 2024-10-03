@@ -6,7 +6,7 @@ import { usePaymentsStore } from "@/store/usePaymentsStore";
 const TableHead = ["Sender Name", "Receiver Name", "Amount", "Currency"];
 
 const TransactionTable = () => {
-  const { isLoading, isError } = useGetPayments();
+  const {} = useGetPayments();
   const { getPayments } = usePaymentsStore((state) => state);
 
   return (
