@@ -1,4 +1,5 @@
 import { NEXT_PUBLIC_CIRCLE_API } from "@/lib/environment";
+import { isWindowOnFocus } from "@/lib/pageVisibility";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -12,11 +13,12 @@ export const getPayments = () => {
     queryKey: ["getPayments"],
     queryFn: async () => {
       const { data } = await axios.get(`${API_ENDPOINT}`);
-
       addPayment(data.data);
       return data;
     },
-    refetchInterval: 1000,
+    refetchInterval: isWindowOnFocus() ? 1000 : 500, // This helps fix in some way the browser throttling when not on focus
+    refetchOnWindowFocus: false,
+    refetchIntervalInBackground: true,
   });
 };
 
