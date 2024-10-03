@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Card } from "@/components/molecules/Card";
-import { Button, Input } from "@headlessui/react";
+import { Button, Input, Textarea } from "@headlessui/react";
 import { customAlphabet } from "nanoid";
 
 import Select, { StylesConfig } from "react-select";
@@ -125,6 +125,19 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                   styles={selectorColourStyles}
                 />
               </div>
+            </div>
+            <div>
+              <label
+                htmlFor="Memo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Memo
+              </label>
+              <Textarea
+                id="Memo"
+                name="Memo"
+                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              ></Textarea>
             </div>
           </div>
           <Button
