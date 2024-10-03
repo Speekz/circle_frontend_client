@@ -10,10 +10,13 @@ import { currenciesForSelector } from "@/lib/constants";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createPaymentSchema } from "@/lib/validators/createPaymentSchema";
+import {
+  createPaymentSchema,
+  TPaymentSchema,
+} from "@/lib/validators/createPaymentSchema";
 
 interface ICreateTransaction {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: TPaymentSchema) => void;
   onClose: () => void;
 }
 
@@ -57,6 +60,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
             <XMarkIcon width={20} height={20} />
           </div>
         </div>
+        {/* @ts-expect-error */}
         <form onSubmit={handleSubmit(onSubmit)} className="w-80 flex flex-col">
           <div className="flex flex-col gap-2 py-4">
             <div>

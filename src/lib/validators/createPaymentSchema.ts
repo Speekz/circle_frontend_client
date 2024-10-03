@@ -14,3 +14,5 @@ export const createPaymentSchema = z.object({
   currency: z.string(),
   memo: z.string().optional(),
 });
+
+export type TPaymentSchema = z.infer<typeof createPaymentSchema>;

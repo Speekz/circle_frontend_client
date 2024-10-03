@@ -6,6 +6,7 @@ import TransactionTable from "@/components/organisms/TransactionTable/Transactio
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import CreateTransaction from "@/components/organisms/TransactionCard/CreateTransaction";
+import { TPaymentSchema } from "@/lib/validators/createPaymentSchema";
 
 export default function Home() {
   const [openNewPaymentModal, setOpenNewPaymentModal] =
@@ -15,7 +16,7 @@ export default function Home() {
     (state) => state
   );
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: TPaymentSchema) => {
     console.log(data);
     setOpenNewPaymentModal(false);
   };
