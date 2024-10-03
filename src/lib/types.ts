@@ -4,11 +4,11 @@ export interface IUser {
 }
 
 export interface IPayment {
-  id: number;
+  id: string;
   date: string;
   sender: IUser;
   receiver: IUser;
-  amount: number;
+  amount: string;
   currency: string;
-  memo: string;
+  memo?: string | undefined;
 }

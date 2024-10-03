@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 interface ICreateTransaction {
   onSubmit: (data: TPaymentSchema) => void;
   onClose: () => void;
+  onLoading: boolean;
 }
 
 const selectorColourStyles: StylesConfig = {
@@ -38,7 +39,11 @@ const selectorColourStyles: StylesConfig = {
 
 const nanoid = customAlphabet("1234567890", 16);
 
-const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
+const CreateTransaction: FC<ICreateTransaction> = ({
+  onSubmit,
+  onClose,
+  onLoading,
+}) => {
   const {} = useGetUsers();
   const { getUsersForSelector } = useUsersStore((state) => state);
 
@@ -224,8 +229,9 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
           <Button
             className="rounded self-center bg-indigo-600 py-2 px-4 text-sm text-white data-[hover]:bg-indigo-500 data-[active]:bg-indigo-700"
             type="submit"
+            disabled={onLoading}
           >
-            Create Payment
+            {onLoading ? "Sending Payment..." : "Create Payment"}
           </Button>
         </form>
       </>

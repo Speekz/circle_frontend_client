@@ -1,7 +1,7 @@
 import { NEXT_PUBLIC_CIRCLE_API } from "@/lib/environment";
 import { IPayment } from "@/lib/types";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const API_ENDPOINT = `${NEXT_PUBLIC_CIRCLE_API}/payments`;
@@ -24,10 +24,9 @@ export const useGetPayments = () => {
 };
 
 // replace any with the proper type
-export const usePostPayments = (payment: IPayment) => {
-  return useQuery({
-    queryKey: ["postPayments"],
-    queryFn: async () => {
+export const usePostPayments = () => {
+  return useMutation({
+    mutationFn: async (payment: IPayment) => {
       const response = await axios.post(`${API_ENDPOINT}`, payment);
 
       console.log(response);

@@ -5,20 +5,35 @@ import { Button } from "@headlessui/react";
 import TransactionTable from "@/components/organisms/TransactionTable/TransactionTable";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import CreateTransaction from "@/components/organisms/TransactionCard/CreateTransaction";
 import { TPaymentSchema } from "@/lib/validators/createPaymentSchema";
+import { CreateTransaction } from "@/components/organisms/TransactionCard";
+import { usePostPayments } from "@/hooks/usePayments";
+import { IPayment } from "@/lib/types";
 
 export default function Home() {
-  const [openNewPaymentModal, setOpenNewPaymentModal] =
-    useState<boolean>(false);
-
+  const [isSendingPayment, setIsSendingPayment] = useState<boolean>(false);
   const { livePayments, toggleLivePayments } = usePaymentsStore(
     (state) => state
   );
 
+  const { mutate: postPayment, isError } = usePostPayments();
+
+  const [openNewPaymentModal, setOpenNewPaymentModal] =
+    useState<boolean>(false);
+
   const handleSubmit = (data: TPaymentSchema) => {
-    console.log(data);
-    setOpenNewPaymentModal(false);
+    const { transactionId, sender, receiver, amount, currency, memo } = data;
+    const payment: IPayment = {
+      currency,
+      amount: amount,
+      sender: JSON.parse(sender),
+      receiver: JSON.parse(receiver),
+      id: transactionId,
+      date: new Date().toISOString(),
+    };
+
+    postPayment(payment);
+    // setOpenNewPaymentModal(false);
   };
 
   return (
@@ -76,6 +91,7 @@ export default function Home() {
           <CreateTransaction
             onSubmit={handleSubmit}
             onClose={() => setOpenNewPaymentModal(false)}
+            onLoading={isSendingPayment}
           />
         </div>
       ) : null}
