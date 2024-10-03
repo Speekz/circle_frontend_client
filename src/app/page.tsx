@@ -71,7 +71,10 @@ export default function Home() {
       {/* Card display will be here */}
       {openNewPaymentModal ? (
         <div className="absolute flex flex-col items-center justify-center top-0 left-0 w-screen h-screen bg-slate-400/25 z-10">
-          <CreateTransaction onSubmit={handleSubmit} />
+          <CreateTransaction
+            onSubmit={handleSubmit}
+            onClose={() => setOpenNewPaymentModal(false)}
+          />
         </div>
       ) : null}
     </div>
