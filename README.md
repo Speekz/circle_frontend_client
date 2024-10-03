@@ -19,6 +19,8 @@ yarn start
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+If you have the server running, please make sure it runs on the port 8080, if not, create a new `.env.local` following the `.env.example`
+
 ## Objectives
 
 - Create a dashboard to see the latest 25 payments / transactions
