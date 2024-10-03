@@ -4,7 +4,7 @@ import { usePaymentsStore } from "@/store/usePaymentsStore";
 
 export default function Home() {
   useGetPayments();
-  const { payments } = usePaymentsStore((state) => state);
+  const { getPayments } = usePaymentsStore((state) => state);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {payments.map((transaction) => (
+                {getPayments(5).map((transaction, index) => (
                   <tr key={transaction.id} className="hover:bg-slate-100">
                     <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
                       {transaction?.sender?.name}
