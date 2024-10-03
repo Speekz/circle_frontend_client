@@ -96,7 +96,10 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                     styles={selectorColourStyles}
                     options={getUsersForSelector()}
                     value={getUsersForSelector().find((c) => c.value === value)}
-                    onChange={(val) => onChange(val)}
+                    onChange={(val) => {
+                      // @ts-expect-error
+                      onChange(val.value);
+                    }}
                   />
                 )}
               />
@@ -121,7 +124,10 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                     styles={selectorColourStyles}
                     options={getUsersForSelector()}
                     value={getUsersForSelector().find((c) => c.value === value)}
-                    onChange={(val) => onChange(val)}
+                    onChange={(val) => {
+                      // @ts-expect-error
+                      onChange(val.value);
+                    }}
                   />
                 )}
               />
@@ -170,7 +176,10 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                       value={currenciesForSelector.find(
                         (c) => c.value === value
                       )}
-                      onChange={(val) => onChange(val)}
+                      onChange={(val) => {
+                        // @ts-expect-error
+                        onChange(val.value);
+                      }}
                     />
                   )}
                 />
