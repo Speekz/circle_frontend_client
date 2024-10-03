@@ -8,7 +8,7 @@ export const createPaymentSchema = z
     amount: z.string().refine(
       (v) => {
         const n = Number(v);
-        return !isNaN(n) && v?.length > 0 && n !== 0;
+        return !isNaN(n) && v?.length > 0 && n !== 0 && n > 0;
       },
       { message: "Invalid number" }
     ),
