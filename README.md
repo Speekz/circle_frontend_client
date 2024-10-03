@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Circle Frontend Takehome Test
+
+This is the Circle Frontend Takehome test, created with [Next.js](https://nextjs.org)
 
 ## Getting Started
 
-First, run the development server:
+To run the project, run the following commands to run the development server:
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+
+For running it in production, use the following commands:
+
+```bash
+yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Objectives
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Create a dashboard to see the latest 25 payments / transactions
+- Be able to create a new transaction and see it on the table
 
-## Learn More
+## Project Management
 
-To learn more about Next.js, take a look at the following resources:
+You can lookup the project management of this takehome test [here](https://ticktick.com/pub/project/collaboration/invite/6e658317101f4a6ca15d7ccbad8516d6?u=da4ddf3abfb54c20898250d36ebdd00d)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+It should look like this:
+[![Project Management V1](public/assets/Project-management-v1.png)](https://ticktick.com/pub/project/collaboration/invite/6e658317101f4a6ca15d7ccbad8516d6?u=da4ddf3abfb54c20898250d36ebdd00d)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design Phase
 
-## Deploy on Vercel
+For the design, I choose a simple one page site where you are able to see and add new transactions into the dashboard.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here's how I conceptualiced first:
+![Dashboard V1](public/assets/Dashboard-v1.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The user in the dashboard should be able to:
+
+- Filter by:
+  - Transaction ID.
+  - User Name or ID.
+  - Currency.
+  - Amount minimun and/or maximum.
+  - Date From and/or Date to.
+- Sort by all data displayed on the table
