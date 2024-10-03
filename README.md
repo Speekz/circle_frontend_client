@@ -19,7 +19,13 @@ yarn start
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Environment
+
 If you have the server running, please make sure it runs on the port 8080, if not, create a new `.env.local` following the `.env.example`
+You don't really need to setup the environment variables if you have the following definitions:
+
+- NEXT_PUBLIC_CIRCLE_API is `http://localhost:8080`. This is where you place the API URL to get the data from.
+- NEXT_PUBLIC_MAX_PAYMENTS_COUNT is `1000`. This is the max amount of recent payments transactions to be stored.
 
 ## Objectives
 
