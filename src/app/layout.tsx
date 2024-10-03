@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ReactQueryClientProvider } from "@/components/providers/ReactQueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Circle Dashboard - Payments",
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

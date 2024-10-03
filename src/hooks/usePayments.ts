@@ -1,18 +1,22 @@
 import { NEXT_PUBLIC_CIRCLE_API } from "@/lib/environment";
+import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const API_ENDPOINT = `${NEXT_PUBLIC_CIRCLE_API}/payments`;
 
 export const getPayments = () => {
+  const addPayment = usePaymentsStore((state) => state.addPayment);
+
   return useQuery({
     queryKey: ["getPayments"],
     queryFn: async () => {
-      const response = await axios.get(`${API_ENDPOINT}`);
+      const { data } = await axios.get(`${API_ENDPOINT}`);
 
-      console.log(response);
-      return null;
+      addPayment(data.data);
+      return data;
     },
+    refetchInterval: 1000,
   });
 };
 
