@@ -60,7 +60,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
             <XMarkIcon width={20} height={20} />
           </div>
         </div>
-        {/* @ts-expect-error */}
+        {/* @ts-expect-error onSubmit will get data on the format of TPaymentSchema*/}
         <form onSubmit={handleSubmit(onSubmit)} className="w-80 flex flex-col">
           <div className="flex flex-col gap-2 py-4">
             <div>
@@ -101,7 +101,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                     options={getUsersForSelector()}
                     value={getUsersForSelector().find((c) => c.value === value)}
                     onChange={(val) => {
-                      // @ts-expect-error
+                      // @ts-expect-error I need only the value from the selector
                       onChange(val.value);
                     }}
                   />
@@ -129,7 +129,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                     options={getUsersForSelector()}
                     value={getUsersForSelector().find((c) => c.value === value)}
                     onChange={(val) => {
-                      // @ts-expect-error
+                      // @ts-expect-error I need only the value from the selector
                       onChange(val.value);
                     }}
                   />
@@ -181,7 +181,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({ onSubmit, onClose }) => {
                         (c) => c.value === value
                       )}
                       onChange={(val) => {
-                        // @ts-expect-error
+                        // @ts-expect-error I need only the value from the selector
                         onChange(val.value);
                       }}
                     />
