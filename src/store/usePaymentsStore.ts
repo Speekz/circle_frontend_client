@@ -1,13 +1,14 @@
+import { IPayments } from "@/lib/types";
 import { create } from "zustand";
 
-interface IPayments {
-  payments: any[];
-  addPayment: (newPayment: any) => void;
+interface IUsePaymentsStore {
+  payments: IPayments[];
+  addPayment: (newPayment: IPayments) => void;
 }
 
-export const usePaymentsStore = create<IPayments>()((set) => ({
+export const usePaymentsStore = create<IUsePaymentsStore>()((set) => ({
   payments: [],
-  addPayment: (newPayment: any) =>
+  addPayment: (newPayment: IPayments) =>
     set(({ payments }) => ({
       payments: [...payments, newPayment],
     })),
