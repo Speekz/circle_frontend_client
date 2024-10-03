@@ -14,7 +14,7 @@ interface IUseUsersStore {
 
 export const useUsersStore = create<IUseUsersStore>((set, get) => ({
   users: [],
-  setUsers: (newUsers: any) =>
+  setUsers: (newUsers: IUser[]) =>
     set(() => ({
       users: newUsers,
     })),
