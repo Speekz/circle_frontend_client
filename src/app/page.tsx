@@ -5,6 +5,7 @@ import { Button } from "@headlessui/react";
 import TransactionTable from "@/components/organisms/TransactionTable/TransactionTable";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import CreateTransaction from "@/components/organisms/TransactionCard/CreateTransaction";
 
 export default function Home() {
   const [openNewPaymentModal, setOpenNewPaymentModal] =
@@ -13,6 +14,10 @@ export default function Home() {
   const { livePayments, toggleLivePayments } = usePaymentsStore(
     (state) => state
   );
+
+  const handleSubmit = () => {
+    setOpenNewPaymentModal(!openNewPaymentModal);
+  };
 
   return (
     <div>
@@ -64,6 +69,11 @@ export default function Home() {
         </div>
       </div>
       {/* Card display will be here */}
+      {openNewPaymentModal ? (
+        <div className="absolute flex flex-col items-center justify-center top-0 left-0 w-screen h-screen bg-slate-400/25 z-10">
+          <CreateTransaction onSubmit={handleSubmit} />
+        </div>
+      ) : null}
     </div>
   );
 }
