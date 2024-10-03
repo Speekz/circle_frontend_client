@@ -8,7 +8,7 @@ import axios from "axios";
 const API_ENDPOINT = `${NEXT_PUBLIC_CIRCLE_API}/payments`;
 
 export const useGetPayments = () => {
-  const addPayment = usePaymentsStore((state) => state.addPayment);
+  const { livePayments, addPayment } = usePaymentsStore((state) => state);
 
   return useQuery({
     queryKey: ["getPayments"],
@@ -20,6 +20,7 @@ export const useGetPayments = () => {
     refetchInterval: 1000,
     refetchOnWindowFocus: false,
     refetchIntervalInBackground: true,
+    enabled: livePayments,
   });
 };
 

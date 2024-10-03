@@ -3,12 +3,15 @@ import { IPayment } from "@/lib/types";
 import { create } from "zustand";
 
 interface IUsePaymentsStore {
+  livePayments: boolean;
+  toggleLivePayments: () => void;
   payments: IPayment[];
   addPayment: (newPayment: IPayment) => void;
   getPayments: (count: number) => IPayment[];
 }
 
 export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
+  livePayments: true,
   payments: [],
   addPayment: (newPayment: IPayment) =>
     set(({ payments }) => {
@@ -19,7 +22,6 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
       } else {
         modifiedPayments.unshift(newPayment);
       }
-
       return {
         payments: modifiedPayments,
       };
@@ -31,4 +33,6 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
       return get().payments;
     }
   },
+  toggleLivePayments: () =>
+    set(({ livePayments }) => ({ livePayments: !livePayments })),
 }));
