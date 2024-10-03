@@ -47,3 +47,12 @@ The user in the dashboard should be able to:
   - Amount minimun and/or maximum.
   - Date From and/or Date to.
 - Sort by all data displayed on the table
+
+When creating a new payment, the user should be able to:
+
+- Select the user that will SEND the payment.
+- Select the user that will RECEIVE the payment.
+- Place an amount for the payment.
+- Currency of the payment.
+
+NOTE: The transaction ID will be automatically populated.
