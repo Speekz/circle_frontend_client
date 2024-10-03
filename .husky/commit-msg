@@ -1,0 +1,6 @@
+if [ "$CI" = "true" ]
+then
+  exit 0
+fi
+
+exec < /dev/tty && npx git-cz --hook || true
