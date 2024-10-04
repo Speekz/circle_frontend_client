@@ -12,9 +12,14 @@ import { IPayment } from "@/lib/types";
 import { toast } from "react-toastify";
 import { SearchBar } from "@/components/organisms/SearchBar";
 import { useGetUsers } from "@/hooks/useUsers";
+import { selectorColourStyles } from "@/lib/styles/selector";
+import { defaultTableSize } from "@/lib/constants";
+import Select from "react-select";
 
 export default function Home() {
   const [isSendingPayment, setIsSendingPayment] = useState<boolean>(false);
+  const [tableSize, setTableSize] = useState(25);
+
   const { livePayments, toggleLivePayments } = usePaymentsStore(
     (state) => state
   );
@@ -96,8 +101,20 @@ export default function Home() {
           </div>
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 overflow-y-scroll h-[600px]">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-              <TransactionTable />
+              <TransactionTable tableSize={tableSize} />
             </div>
+          </div>
+          <div className="pt-4 w-96 flex flex-row gap-4 items-center">
+            <span>Table Size: </span>
+            <Select
+              options={defaultTableSize}
+              defaultValue={defaultTableSize[0]}
+              isSearchable={false}
+              menuPlacement="auto"
+              onChange={(val) => {
+                setTableSize(parseInt(val?.value as string));
+              }}
+            />
           </div>
         </div>
       </div>

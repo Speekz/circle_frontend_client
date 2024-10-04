@@ -3,9 +3,13 @@ import { Table } from "@/components/molecules/Table";
 import { useGetPayments } from "@/hooks/usePayments";
 import { tableHeadColumnsValues } from "@/lib/constants";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 
-const TransactionTable = () => {
+interface ITransactionTable {
+  tableSize: number;
+}
+
+const TransactionTable: FC<ITransactionTable> = ({ tableSize }) => {
   const {} = useGetPayments();
   const { filters, tableColumns, getPaymentsFiltered } = usePaymentsStore(
     (state) => state
@@ -31,7 +35,7 @@ const TransactionTable = () => {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 bg-white">
-        {getPaymentsFiltered(25, filters).map((transaction) => (
+        {getPaymentsFiltered(tableSize, filters).map((transaction) => (
           <tr key={transaction.id} className="hover:bg-slate-100">
             {tableColumns.transactionId && (
               <Table.Data data={transaction?.id} />
