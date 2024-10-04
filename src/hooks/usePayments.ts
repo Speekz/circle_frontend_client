@@ -25,16 +25,19 @@ export const useGetPayments = () => {
 
 // replace any with the proper type
 export const usePostPayments = () => {
+  const { addPayment } = usePaymentsStore((state) => state);
+
   return useMutation({
     mutationFn: async (payment: IPayment) => {
-      const response = await axios.post(`${API_ENDPOINT}`, payment);
-
-      console.log(response);
-      return null;
+      await axios.post(`${API_ENDPOINT}`, payment);
+      return payment;
     },
     retry: (failureCount, error) => {
       // @ts-expect-error error has status code
       return failureCount < Infinity && error.status === 503;
+    },
+    onSuccess: (data: IPayment) => {
+      addPayment(data);
     },
   });
 };
