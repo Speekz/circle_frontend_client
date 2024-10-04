@@ -27,6 +27,10 @@ You don't really need to setup the environment variables if you have the followi
 - NEXT_PUBLIC_CIRCLE_API is `http://localhost:8080`. This is where you place the API URL to get the data from.
 - NEXT_PUBLIC_MAX_PAYMENTS_COUNT is `1000`. This is the max amount of recent payments transactions to be stored.
 
+### End Product
+
+![Dashboard End](public/assets/Dashboard-end.png)
+
 ## Objectives
 
 - Create a dashboard to see the latest 25 payments / transactions
