@@ -14,9 +14,9 @@ export const filterPayments = (
     checkForMemoIncludes: filters.memo !== "",
   };
 
-  let filteredPayments: IPayment[] = [];
+  const filteredPayments: IPayment[] = [];
 
-  for (let payment of payments) {
+  for (const payment of payments) {
     if (checkFilters.checkForTransactionId) {
       const validateTransactionId = filterTransactionId(
         payment.id,
