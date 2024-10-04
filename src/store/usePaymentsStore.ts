@@ -1,5 +1,7 @@
 import { NEXT_PUBLIC_MAX_PAYMENTS_COUNT } from "@/lib/environment";
+import { filterPayments } from "@/lib/helpers";
 import { IPayment } from "@/lib/types";
+import { TFilterPaymentsSchema } from "@/lib/validators/filterPaymentsSchema";
 import { create } from "zustand";
 
 interface IUsePaymentsStore {
@@ -8,6 +10,7 @@ interface IUsePaymentsStore {
   payments: IPayment[];
   addPayment: (newPayment: IPayment) => void;
   getPayments: (count: number) => IPayment[];
+  getPaymentsFiltered: (filters: TFilterPaymentsSchema) => IPayment[];
 }
 
 export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
@@ -32,6 +35,9 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
     } else {
       return get().payments;
     }
+  },
+  getPaymentsFiltered: (filters: TFilterPaymentsSchema) => {
+    return filterPayments(get().payments, filters);
   },
   toggleLivePayments: () =>
     set(({ livePayments }) => ({ livePayments: !livePayments })),
