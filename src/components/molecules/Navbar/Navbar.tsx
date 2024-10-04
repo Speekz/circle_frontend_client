@@ -20,6 +20,10 @@ const navbarContent: INavbarContent[] = [
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
+  const toggleNavBar = () => {
+    setShowNavbar(!showNavbar);
+  };
+
   return (
     <nav className="top-0 left-0 fixed w-full bg-white border-b shadow-sm z-40">
       <div className="hidden h-16 px-8 md:m-auto md:flex md:flex-row md:justify-between">
@@ -42,17 +46,14 @@ const Navbar = () => {
       </div>
       <div className="flex px-4 m-auto flex-row justify-between h-16 md:hidden">
         <div className="flex flex-row items-center gap-4">
-          <div
-            className="cursor-pointer select-none"
-            onClick={() => setShowNavbar(!showNavbar)}
-          >
+          <div className="cursor-pointer select-none" onClick={toggleNavBar}>
             {!showNavbar ? (
               <Bars3Icon className="h-8 w-8" />
             ) : (
               <XMarkIcon className="h-8 w-8" />
             )}
           </div>
-          <Link href="/">
+          <Link href="/" onClick={() => setShowNavbar(false)}>
             <img
               src="/assets/circle-logo.png"
               className="w-36 h-10"
@@ -64,7 +65,12 @@ const Navbar = () => {
       <div className={classNames(showNavbar ? "z-40 w-dvw h-dvh" : "hidden")}>
         <div className="flex flex-col px-16 py-4 gap-4">
           {navbarContent.map(({ href, text }) => (
-            <Link href={href} className="text-lg" key={href + text}>
+            <Link
+              href={href}
+              className="text-lg"
+              key={href + text}
+              onClick={toggleNavBar}
+            >
               {text}
             </Link>
           ))}
