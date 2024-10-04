@@ -7,7 +7,7 @@ const TableHead = ["Sender Name", "Receiver Name", "Amount", "Currency"];
 
 const TransactionTable = () => {
   const {} = useGetPayments();
-  const { getPayments } = usePaymentsStore((state) => state);
+  const { filters, getPaymentsFiltered } = usePaymentsStore((state) => state);
 
   return (
     <Table>
@@ -19,7 +19,7 @@ const TransactionTable = () => {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 bg-white">
-        {getPayments(25).map((transaction) => (
+        {getPaymentsFiltered(25, filters).map((transaction) => (
           <tr key={transaction.id} className="hover:bg-slate-100">
             <Table.Data data={transaction?.sender?.name} />
             <Table.Data data={transaction?.receiver?.name} />

@@ -8,14 +8,19 @@ interface IUsePaymentsStore {
   livePayments: boolean;
   toggleLivePayments: () => void;
   payments: IPayment[];
+  filters: TFilterPaymentsSchema | null;
+  setFilters: (newFilters: TFilterPaymentsSchema | null) => void;
   addPayment: (newPayment: IPayment) => void;
-  getPayments: (count: number) => IPayment[];
-  getPaymentsFiltered: (filters: TFilterPaymentsSchema) => IPayment[];
+  getPaymentsFiltered: (
+    count: number,
+    filters: TFilterPaymentsSchema | null
+  ) => IPayment[];
 }
 
 export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
   livePayments: true,
   payments: [],
+  filters: null,
   addPayment: (newPayment: IPayment) =>
     set(({ payments }) => {
       const modifiedPayments = payments;
@@ -29,15 +34,22 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
         payments: modifiedPayments,
       };
     }),
-  getPayments: (count: number) => {
-    if (get().payments.length > count) {
-      return get().payments.slice(0, count);
+  setFilters: (newFilters: TFilterPaymentsSchema | null) =>
+    set(() => ({
+      filters: newFilters,
+    })),
+  getPaymentsFiltered: (
+    count: number,
+    filters: TFilterPaymentsSchema | null
+  ) => {
+    let payments = get().payments;
+    if (!!filters) payments = filterPayments(get().payments, filters);
+
+    if (payments.length > count) {
+      return payments.slice(0, count);
     } else {
-      return get().payments;
+      return payments;
     }
-  },
-  getPaymentsFiltered: (filters: TFilterPaymentsSchema) => {
-    return filterPayments(get().payments, filters);
   },
   toggleLivePayments: () =>
     set(({ livePayments }) => ({ livePayments: !livePayments })),

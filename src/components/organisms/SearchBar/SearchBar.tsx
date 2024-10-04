@@ -6,6 +6,7 @@ import {
   filterPaymentsSchema,
   TFilterPaymentsSchema,
 } from "@/lib/validators/filterPaymentsSchema";
+import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { useUsersStore } from "@/store/useUsersStore";
 import { Button, Input } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,6 +38,8 @@ const SearchBar = () => {
   });
 
   const { getUsersForSelector } = useUsersStore((state) => state);
+  const { setFilters } = usePaymentsStore((state) => state);
+
   const usersOptions = getUsersForSelector();
 
   const handleToggleAdvancedSearch = () => {
@@ -47,10 +50,11 @@ const SearchBar = () => {
   };
 
   const onSubmit = (data: TFilterPaymentsSchema) => {
-    console.log(data);
+    setFilters(data);
   };
 
   const handleReset = () => {
+    setFilters(null);
     reset();
   };
 
