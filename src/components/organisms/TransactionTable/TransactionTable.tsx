@@ -4,7 +4,7 @@ import { Table } from "@/components/molecules/Table";
 import { useGetPayments } from "@/hooks/usePayments";
 import { tableHeadColumnsValues } from "@/lib/constants";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
-import currency from "currency.js";
+import { format } from "date-fns";
 import { currenciesMapper } from "@/lib/helpers";
 
 interface ITransactionTable {
@@ -58,7 +58,9 @@ const TransactionTable: FC<ITransactionTable> = ({ tableSize }) => {
             {tableColumns.currency && (
               <Table.Data data={transaction?.currency} />
             )}
-            {tableColumns.date && <Table.Data data={transaction?.date} />}
+            {tableColumns.date && (
+              <Table.Data data={format(transaction?.date, "PPpp")} />
+            )}
             {tableColumns.memo && (
               <Table.Data data={transaction?.memo as string} />
             )}
