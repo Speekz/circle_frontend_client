@@ -10,6 +10,8 @@ import { CreateTransaction } from "@/components/organisms/TransactionCard";
 import { usePostPayments } from "@/hooks/usePayments";
 import { IPayment } from "@/lib/types";
 import { toast } from "react-toastify";
+import { SearchBar } from "@/components/organisms/SearchBar";
+import { useGetUsers } from "@/hooks/useUsers";
 
 export default function Home() {
   const [isSendingPayment, setIsSendingPayment] = useState<boolean>(false);
@@ -17,6 +19,7 @@ export default function Home() {
     (state) => state
   );
 
+  const {} = useGetUsers();
   const { mutateAsync: postPayment } = usePostPayments();
 
   const [openNewPaymentModal, setOpenNewPaymentModal] =
@@ -49,6 +52,10 @@ export default function Home() {
 
   return (
     <div>
+      <div className="px-4 pt-4 sm:px-6 lg:px-8">
+        <SearchBar />
+      </div>
+      {/* Add new payment */}
       <div className="flex">
         <Button
           className="group fixed bottom-5 right-5 rounded-full bg-indigo-600 text-sm h-10 w-10 text-white font-bold data-[hover]:bg-indigo-500 data-[active]:bg-indigo-700 z-10"
@@ -63,20 +70,7 @@ export default function Home() {
       {/* Transaction Table with action buttons */}
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="mt-8 flow-root">
-          <div className="flex flex-row justify-between items-center">
-            <div>
-              {livePayments ? (
-                <span>
-                  Data is being fetched{" "}
-                  <span className="text-red-500 font-bold">LIVE</span>
-                </span>
-              ) : (
-                <span>
-                  Data fetching is on{" "}
-                  <span className="text-indigo-500 font-bold">PAUSE</span>
-                </span>
-              )}
-            </div>
+          <div className="flex flex-row items-center gap-4">
             <Button
               className={classnames(
                 "rounded py-2 px-4 text-sm text-white w-24 font-bold",
@@ -88,6 +82,17 @@ export default function Home() {
             >
               {livePayments ? "LIVE" : "PAUSED"}
             </Button>
+            {livePayments ? (
+              <span>
+                Data is being fetched{" "}
+                <span className="text-red-500 font-bold">LIVE</span>
+              </span>
+            ) : (
+              <span>
+                Data fetching is on{" "}
+                <span className="text-indigo-500 font-bold">PAUSE</span>
+              </span>
+            )}
           </div>
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 overflow-y-scroll h-[600px]">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -98,7 +103,7 @@ export default function Home() {
       </div>
       {/* Card display will be here */}
       {openNewPaymentModal ? (
-        <div className="absolute flex flex-col items-center justify-center top-0 left-0 w-screen h-screen bg-slate-400/25 z-10">
+        <div className="fixed flex flex-col items-center justify-center top-0 left-0 min-w-full min-h-full bg-slate-400/25 z-10">
           <CreateTransaction
             onSubmit={handleSubmit}
             onClose={() => setOpenNewPaymentModal(false)}

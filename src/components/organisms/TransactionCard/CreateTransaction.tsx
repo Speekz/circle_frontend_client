@@ -3,7 +3,7 @@ import { Card } from "@/components/molecules/Card";
 import { Button, Input, Textarea } from "@headlessui/react";
 import { customAlphabet } from "nanoid";
 
-import Select, { StylesConfig } from "react-select";
+import Select from "react-select";
 import { useUsersStore } from "@/store/useUsersStore";
 import { useGetUsers } from "@/hooks/useUsers";
 import { currenciesForSelector } from "@/lib/constants";
@@ -15,27 +15,13 @@ import {
   TPaymentSchema,
 } from "@/lib/validators/createPaymentSchema";
 import { toast } from "react-toastify";
+import { selectorColourStyles } from "@/lib/styles/selector";
 
 interface ICreateTransaction {
   onSubmit: (data: TPaymentSchema) => void;
   onClose: () => void;
   onLoading: boolean;
 }
-
-const selectorColourStyles: StylesConfig = {
-  control: (baseStyles, state) => ({
-    ...baseStyles,
-    borderColor: state.isFocused ? "#4f46e5" : "#d1d5db",
-  }),
-  option: (baseStyles, state) => ({
-    ...baseStyles,
-    backgroundColor: state.isSelected
-      ? "#4f46e5"
-      : state.isFocused
-      ? "#a5b4fc"
-      : "white",
-  }),
-};
 
 const nanoid = customAlphabet("1234567890", 16);
 
@@ -44,9 +30,8 @@ const CreateTransaction: FC<ICreateTransaction> = ({
   onClose,
   onLoading,
 }) => {
-  const {} = useGetUsers();
   const { getUsersForSelector } = useUsersStore((state) => state);
-
+  const usersOptions = getUsersForSelector();
   const transactionId = useMemo(() => nanoid(), []);
   const {
     control,
@@ -111,8 +96,8 @@ const CreateTransaction: FC<ICreateTransaction> = ({
                 render={({ field: { onChange, value } }) => (
                   <Select
                     styles={selectorColourStyles}
-                    options={getUsersForSelector()}
-                    value={getUsersForSelector().find((c) => c.value === value)}
+                    options={usersOptions}
+                    value={usersOptions.find((c) => c.value === value)}
                     onChange={(val) => {
                       // @ts-expect-error I need only the value from the selector
                       onChange(val.value);
