@@ -1,6 +1,5 @@
 "use client";
 
-import CircleLogo from "@/components/Icons/CircleLogo";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import Link from "next/link";
