@@ -54,7 +54,8 @@ The user in the dashboard should be able to:
   - Currency.
   - Amount minimun and/or maximum.
   - Date From and/or Date to.
-- Sort by all data displayed on the table
+
+NOTE: Becase the date and time are so short/close together, I did not create a Date-from and/or Date-to filter.
 
 When creating a new payment, the user should be able to:
 
