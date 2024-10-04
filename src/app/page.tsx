@@ -12,7 +12,6 @@ import { IPayment } from "@/lib/types";
 import { toast } from "react-toastify";
 import { SearchBar } from "@/components/organisms/SearchBar";
 import { useGetUsers } from "@/hooks/useUsers";
-import { selectorColourStyles } from "@/lib/styles/selector";
 import { defaultTableSize } from "@/lib/constants";
 import Select from "react-select";
 
