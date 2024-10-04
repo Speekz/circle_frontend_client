@@ -2,7 +2,6 @@
 import classnames from "classnames";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { Button } from "@headlessui/react";
-import TransactionTable from "@/components/organisms/TransactionTable/TransactionTable";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { TCreatePaymentSchema } from "@/lib/validators/createPaymentSchema";
@@ -14,6 +13,7 @@ import { SearchBar } from "@/components/organisms/SearchBar";
 import { useGetUsers } from "@/hooks/useUsers";
 import { defaultTableSize } from "@/lib/constants";
 import Select from "react-select";
+import { TransactionTable } from "@/components/organisms/TransactionTable";
 
 export default function Home() {
   const [isSendingPayment, setIsSendingPayment] = useState<boolean>(false);
