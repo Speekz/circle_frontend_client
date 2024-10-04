@@ -2,7 +2,6 @@
 import { Table } from "@/components/molecules/Table";
 import { useGetPayments } from "@/hooks/usePayments";
 import { tableHeadColumnsValues } from "@/lib/constants";
-import { ITableColumns } from "@/lib/types";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { useMemo } from "react";
 
