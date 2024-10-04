@@ -5,20 +5,19 @@ import { customAlphabet } from "nanoid";
 
 import Select from "react-select";
 import { useUsersStore } from "@/store/useUsersStore";
-import { useGetUsers } from "@/hooks/useUsers";
 import { currenciesForSelector } from "@/lib/constants";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   createPaymentSchema,
-  TPaymentSchema,
+  TCreatePaymentSchema,
 } from "@/lib/validators/createPaymentSchema";
 import { toast } from "react-toastify";
 import { selectorColourStyles } from "@/lib/styles/selector";
 
 interface ICreateTransaction {
-  onSubmit: (data: TPaymentSchema) => void;
+  onSubmit: (data: TCreatePaymentSchema) => void;
   onClose: () => void;
   onLoading: boolean;
 }
@@ -58,7 +57,7 @@ const CreateTransaction: FC<ICreateTransaction> = ({
             <XMarkIcon width={20} height={20} />
           </div>
         </div>
-        {/* @ts-expect-error onSubmit will get data on the format of TPaymentSchema*/}
+        {/* @ts-expect-error onSubmit will get data on the format of TCreatePaymentSchema*/}
         <form onSubmit={handleSubmit(onSubmit)} className="w-80 flex flex-col">
           <div className="flex flex-col gap-2 py-4">
             <div>

@@ -5,7 +5,7 @@ import { Button } from "@headlessui/react";
 import TransactionTable from "@/components/organisms/TransactionTable/TransactionTable";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { TPaymentSchema } from "@/lib/validators/createPaymentSchema";
+import { TCreatePaymentSchema } from "@/lib/validators/createPaymentSchema";
 import { CreateTransaction } from "@/components/organisms/TransactionCard";
 import { usePostPayments } from "@/hooks/usePayments";
 import { IPayment } from "@/lib/types";
@@ -25,7 +25,7 @@ export default function Home() {
   const [openNewPaymentModal, setOpenNewPaymentModal] =
     useState<boolean>(false);
 
-  const handleSubmit = async (data: TPaymentSchema) => {
+  const handleSubmit = async (data: TCreatePaymentSchema) => {
     const { transactionId, sender, receiver, amount, currency, memo } = data;
     const payment: IPayment = {
       currency,

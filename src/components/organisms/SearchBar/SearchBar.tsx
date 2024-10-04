@@ -2,6 +2,10 @@
 
 import { currenciesForSelector } from "@/lib/constants";
 import { selectorColourStyles } from "@/lib/styles/selector";
+import {
+  filterPaymentsSchema,
+  TFilterPaymentsSchema,
+} from "@/lib/validators/filterPaymentsSchema";
 import { useUsersStore } from "@/store/useUsersStore";
 import { Button, Input } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,10 +30,10 @@ const SearchBar = () => {
     resetField,
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm({
     defaultValues: searchBarDefaults,
-    // resolver: zodResolver({}),
+    resolver: zodResolver(filterPaymentsSchema),
   });
 
   const { getUsersForSelector } = useUsersStore((state) => state);
@@ -42,18 +46,17 @@ const SearchBar = () => {
     setIsAdvancedSearch(!isAdvancedSearch);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (data: TFilterPaymentsSchema) => {
+    console.log(data);
+  };
 
   const handleReset = () => {
     reset();
   };
 
   return (
-    <>
-      <form
-        className="grid grid-cols-1 gap-4 md:grid-cols-3"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div>
           <label
             htmlFor="transactionId"
@@ -177,7 +180,7 @@ const SearchBar = () => {
             </div>
           </>
         ) : null}
-      </form>
+      </div>
       <div className="flex flex-row justify-between items-center pt-4">
         <Button
           className="text-indigo-500"
@@ -201,7 +204,7 @@ const SearchBar = () => {
           </Button>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 

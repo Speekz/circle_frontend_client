@@ -1,17 +1,12 @@
 import { z } from "zod";
+import { isValidNumber } from "../helpers";
 
 export const createPaymentSchema = z
   .object({
     transactionId: z.string().length(16),
     sender: z.string(),
     receiver: z.string(),
-    amount: z.string().refine(
-      (v) => {
-        const n = Number(v);
-        return !isNaN(n) && v?.length > 0 && n !== 0 && n > 0;
-      },
-      { message: "Invalid number" }
-    ),
+    amount: z.string().refine(isValidNumber, { message: "Invalid number" }),
     currency: z.string(),
     memo: z.string().optional(),
   })
@@ -19,4 +14,4 @@ export const createPaymentSchema = z
     message: "Sender and receiver should be different",
   });
 
-export type TPaymentSchema = z.infer<typeof createPaymentSchema>;
+export type TCreatePaymentSchema = z.infer<typeof createPaymentSchema>;
