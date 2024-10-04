@@ -11,7 +11,7 @@ const TransactionTable = () => {
 
   return (
     <Table>
-      <thead>
+      <thead className="sticky top-0 bg-white border-b shadow-sm">
         <tr>
           {TableHead.map((columnName, index) => (
             <Table.Head text={columnName} key={columnName + index} />

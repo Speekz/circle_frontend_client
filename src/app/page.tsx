@@ -89,7 +89,7 @@ export default function Home() {
               {livePayments ? "LIVE" : "PAUSED"}
             </Button>
           </div>
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 overflow-y-scroll h-[600px]">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <TransactionTable />
             </div>
