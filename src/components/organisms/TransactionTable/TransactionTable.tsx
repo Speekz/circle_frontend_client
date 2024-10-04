@@ -1,9 +1,11 @@
 "use client";
+import { FC, useMemo } from "react";
 import { Table } from "@/components/molecules/Table";
 import { useGetPayments } from "@/hooks/usePayments";
 import { tableHeadColumnsValues } from "@/lib/constants";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
-import { FC, useMemo } from "react";
+import currency from "currency.js";
+import { currenciesMapper } from "@/lib/helpers";
 
 interface ITransactionTable {
   tableSize: number;
@@ -46,7 +48,13 @@ const TransactionTable: FC<ITransactionTable> = ({ tableSize }) => {
             {tableColumns.receiver && (
               <Table.Data data={transaction?.receiver?.name} />
             )}
-            {tableColumns.amount && <Table.Data data={transaction?.amount} />}
+            {tableColumns.amount && (
+              <Table.Data
+                data={currenciesMapper[transaction?.currency](
+                  transaction?.amount
+                ).format()}
+              />
+            )}
             {tableColumns.currency && (
               <Table.Data data={transaction?.currency} />
             )}

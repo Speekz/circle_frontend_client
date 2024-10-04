@@ -1,8 +1,9 @@
 import { FC } from "react";
 import classnames from "classnames";
+import currency from "currency.js";
 
 interface ITableData {
-  data: string | number | null;
+  data: string | currency | number | null;
   className?: string;
 }
 
@@ -14,7 +15,7 @@ const TableData: FC<ITableData> = ({ data, className }) => {
         className
       )}
     >
-      {data}
+      {data?.toString()}
     </td>
   );
 };
