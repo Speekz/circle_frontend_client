@@ -31,7 +31,7 @@ export const filterPayments = (
         filters.user as string
       );
       const validateReceiverUserId = filterUserId(
-        payment.sender,
+        payment.receiver,
         filters.user as string
       );
       if (!validateSenderUserId && !validateReceiverUserId) continue;
@@ -48,7 +48,7 @@ export const filterPayments = (
     if (checkFilters.checkForMaxAmount) {
       const validateMaxAmount = filterMaxAmount(
         payment.amount,
-        filters.minAmount as string
+        filters.maxAmount as string
       );
       if (!validateMaxAmount) continue;
     }
