@@ -29,8 +29,8 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
     receiver: true,
     amount: true,
     currency: true,
-    memo: false,
     date: false,
+    memo: false,
   },
   addPayment: (newPayment) =>
     set(({ payments }) => {

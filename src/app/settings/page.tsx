@@ -8,6 +8,7 @@ import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { Button } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const SettingsPage = () => {
   const { tableColumns, setTableColumns } = usePaymentsStore((state) => state);
@@ -18,6 +19,7 @@ const SettingsPage = () => {
   });
 
   const onSubmit = (data: TTablePaymentsSchema) => {
+    toast.success("Updated columns!");
     setTableColumns(data);
   };
 
