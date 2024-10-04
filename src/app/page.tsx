@@ -9,6 +9,7 @@ import { TPaymentSchema } from "@/lib/validators/createPaymentSchema";
 import { CreateTransaction } from "@/components/organisms/TransactionCard";
 import { usePostPayments } from "@/hooks/usePayments";
 import { IPayment } from "@/lib/types";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [isSendingPayment, setIsSendingPayment] = useState<boolean>(false);
@@ -16,12 +17,12 @@ export default function Home() {
     (state) => state
   );
 
-  const { mutate: postPayment, isError } = usePostPayments();
+  const { mutateAsync: postPayment } = usePostPayments();
 
   const [openNewPaymentModal, setOpenNewPaymentModal] =
     useState<boolean>(false);
 
-  const handleSubmit = (data: TPaymentSchema) => {
+  const handleSubmit = async (data: TPaymentSchema) => {
     const { transactionId, sender, receiver, amount, currency, memo } = data;
     const payment: IPayment = {
       currency,
@@ -32,8 +33,17 @@ export default function Home() {
       date: new Date().toISOString(),
     };
 
-    postPayment(payment);
-    // setOpenNewPaymentModal(false);
+    try {
+      setIsSendingPayment(true);
+      await postPayment(payment);
+      toast.success("Payment created successfully with id: " + transactionId);
+      setOpenNewPaymentModal(false);
+    } catch (err: unknown) {
+      // @ts-expect-error error sended from the backend
+      toast.error(err.response.data.error);
+    } finally {
+      setIsSendingPayment(false);
+    }
   };
 
   return (

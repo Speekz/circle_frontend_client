@@ -32,5 +32,9 @@ export const usePostPayments = () => {
       console.log(response);
       return null;
     },
+    retry: (failureCount, error) => {
+      // @ts-expect-error error has status code
+      return failureCount < Infinity && error.status === 503;
+    },
   });
 };
