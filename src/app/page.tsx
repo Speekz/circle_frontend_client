@@ -31,6 +31,7 @@ export default function Home() {
       receiver: JSON.parse(receiver),
       id: transactionId,
       date: new Date().toISOString(),
+      memo,
     };
 
     try {
