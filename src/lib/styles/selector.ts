@@ -13,4 +13,10 @@ export const selectorColourStyles: StylesConfig = {
       ? "#a5b4fc"
       : "white",
   }),
+  input: (base) => ({
+    ...base,
+    "input:focus": {
+      boxShadow: "none",
+    },
+  }),
 };
