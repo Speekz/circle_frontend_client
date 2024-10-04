@@ -1,10 +1,12 @@
 import { NEXT_PUBLIC_MAX_PAYMENTS_COUNT } from "@/lib/environment";
 import { filterPayments } from "@/lib/helpers";
-import { IPayment } from "@/lib/types";
+import { IPayment, ITableColumns } from "@/lib/types";
 import { TFilterPaymentsSchema } from "@/lib/validators/filterPaymentsSchema";
 import { create } from "zustand";
 
 interface IUsePaymentsStore {
+  tableColumns: ITableColumns;
+  setTableColumns: (newTableColumns: ITableColumns) => void;
   livePayments: boolean;
   toggleLivePayments: () => void;
   payments: IPayment[];
@@ -21,7 +23,16 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
   livePayments: true,
   payments: [],
   filters: null,
-  addPayment: (newPayment: IPayment) =>
+  tableColumns: {
+    transactionId: false,
+    sender: true,
+    receiver: true,
+    amount: true,
+    currency: true,
+    memo: false,
+    date: false,
+  },
+  addPayment: (newPayment) =>
     set(({ payments }) => {
       const modifiedPayments = payments;
       if (payments.length >= NEXT_PUBLIC_MAX_PAYMENTS_COUNT) {
@@ -34,14 +45,11 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
         payments: modifiedPayments,
       };
     }),
-  setFilters: (newFilters: TFilterPaymentsSchema | null) =>
+  setFilters: (newFilters) =>
     set(() => ({
       filters: newFilters,
     })),
-  getPaymentsFiltered: (
-    count: number,
-    filters: TFilterPaymentsSchema | null
-  ) => {
+  getPaymentsFiltered: (count, filters) => {
     let payments = get().payments;
     if (!!filters) payments = filterPayments(get().payments, filters);
 
@@ -53,4 +61,8 @@ export const usePaymentsStore = create<IUsePaymentsStore>()((set, get) => ({
   },
   toggleLivePayments: () =>
     set(({ livePayments }) => ({ livePayments: !livePayments })),
+  setTableColumns: (newTableColumns) =>
+    set(() => ({
+      tableColumns: newTableColumns,
+    })),
 }));

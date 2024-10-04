@@ -12,3 +12,13 @@ export interface IPayment {
   currency: string;
   memo?: string | undefined;
 }
+
+export interface ITableColumns {
+  transactionId: boolean;
+  sender: boolean;
+  receiver: boolean;
+  amount: boolean;
+  currency: boolean;
+  memo: boolean;
+  date: boolean;
+}
