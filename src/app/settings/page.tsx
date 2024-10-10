@@ -6,7 +6,9 @@ import {
 } from "@/lib/validators/tablePaymentsSchema";
 import { usePaymentsStore } from "@/store/usePaymentsStore";
 import { Button } from "@headlessui/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -25,6 +27,10 @@ const SettingsPage = () => {
 
   return (
     <div className="px-4 pt-4 sm:px-6 lg:px-8">
+      <Link href="/" className="flex flex-row my-2">
+        <ArrowLeftIcon className="h-6 w-6" />
+        <span className="pl-2">Back to Home</span>
+      </Link>
       <h1 className="text-3xl font-semibold">Settings Page</h1>
       <div className="flex flex-col pt-4">
         <h2 className="text-lg font-medium">Add columns to payments table</h2>
