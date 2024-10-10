@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { Card } from "@/components/molecules/Card";
 import { Button, Input, Textarea } from "@headlessui/react";
 import { customAlphabet } from "nanoid";
@@ -29,8 +29,15 @@ const CreateTransaction: FC<ICreateTransaction> = ({
   onClose,
   onLoading,
 }) => {
+  const [userSelected, setUserSelected] = useState("");
   const { getUsersForSelector } = useUsersStore((state) => state);
-  const usersOptions = getUsersForSelector();
+  const usersOptions = useMemo(() => {
+    const users = getUsersForSelector();
+
+    const usersFiltered = users.filter((c) => c.value !== userSelected);
+
+    return usersFiltered;
+  }, [userSelected]);
   const transactionId = useMemo(() => nanoid(), []);
   const {
     control,
@@ -100,6 +107,8 @@ const CreateTransaction: FC<ICreateTransaction> = ({
                     onChange={(val) => {
                       // @ts-expect-error I need only the value from the selector
                       onChange(val.value);
+                      // @ts-expect-error I need only the value from the selector
+                      setUserSelected(val.value);
                     }}
                   />
                 )}
@@ -123,11 +132,13 @@ const CreateTransaction: FC<ICreateTransaction> = ({
                 render={({ field: { onChange, value } }) => (
                   <Select
                     styles={selectorColourStyles}
-                    options={getUsersForSelector()}
-                    value={getUsersForSelector().find((c) => c.value === value)}
+                    options={usersOptions}
+                    value={usersOptions.find((c) => c.value === value)}
                     onChange={(val) => {
                       // @ts-expect-error I need only the value from the selector
                       onChange(val.value);
+                      // @ts-expect-error I need only the value from the selector
+                      setUserSelected(val.value);
                     }}
                   />
                 )}
