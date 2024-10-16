@@ -2,6 +2,13 @@
 
 This is the Circle Frontend Takehome test, created with [Next.js](https://nextjs.org)
 
+## Before the Takehome
+
+You have to take their Online Assessment where you will have 4 questions, one after the other and your organization will determine if you finish all the questions.
+
+Here's my score:
+![Circle Pre-screen](public/assets/Circle-pre-screen.jpeg)
+
 ## Getting Started
 
 To run the project, run the following commands to run the development server:
